@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Stat Comparer</string>
+    <string name="shoot_3_pointers">Shoot 3 pointers</string>
+    <string name="progress_percentage">%1$d%%</string>
+    <string name="pause">Pause</string>
+    <string name="start">Start</string>
+    <string name="reset">Reset</string>
+</resources>
