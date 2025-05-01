@@ -22,6 +22,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -38,6 +39,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.statcomparer.R
 import com.example.statcomparer.ui.theme.StatComparerTheme
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun StatComparerApp() {
@@ -48,6 +51,16 @@ fun StatComparerApp() {
         Participant(name = "Player 2", progressIncrement = 2)
     }
     var competitionInProgress by remember { mutableStateOf(false) }
+
+    if (competitionInProgress){
+        LaunchedEffect(playerOne, playerTwo) {
+            coroutineScope {
+                launch { playerOne.run() }
+                launch { playerTwo.run() }
+            }
+            competitionInProgress = false
+        }
+    }
 
     StatComparerScreen(
         playerOne = playerOne,

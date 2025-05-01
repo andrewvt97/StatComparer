@@ -3,6 +3,8 @@ package com.example.statcomparer.ui
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import kotlinx.coroutines.delay
+import kotlin.math.max
 
 class Participant(
     val name: String,
@@ -18,6 +20,13 @@ class Participant(
 
     var currentProgress by mutableStateOf(initialProgress)
         private set
+
+    suspend fun run() {
+        while (currentProgress < maxProgress){
+            delay(progressDelayMillis)
+            currentProgress += progressIncrement
+        }
+    }
 
     fun reset() {
         currentProgress = 0
